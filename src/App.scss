@@ -1,0 +1,36 @@
+.app {
+  .navbar{
+    
+  }
+  header {
+    padding: 0 45px;
+    text-align: center;
+    background-color: #282c34;
+    min-height: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
+    .search-box {
+      max-width: 70rem;
+      padding: 0 25px;
+      width: 100%;
+
+      h2 {
+        font-size: 2rem;
+        font-weight: 600;
+        margin: 35px 0;
+      }
+    }
+  }
+}
+
+.App-link {
+  color: #61dafb;
+}
+.w-100 {
+  width: 100%;
+}
