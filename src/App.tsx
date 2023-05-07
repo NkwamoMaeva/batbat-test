@@ -10,6 +10,14 @@ const menus = [
   { icon: "prime:user", name: "Compte", href: "/account" },
 ];
 
+const handleFocusOut = () => {
+  document.body.style.overflowY = "scroll";
+
+  document.getElementById("blur")!.style.display = "none";
+  //Hide datalist on search input
+  document.getElementById("result-list")!.style.visibility = "hidden";
+};
+
 function App() {
   return (
     <div className="app">
@@ -28,8 +36,8 @@ function App() {
             bat<span>bat</span>
           </div>
         </div>
-        {menus.map((menu) => (
-          <a className="navbar-item" href={menu.href}>
+        {menus.map((menu, i) => (
+          <a className="navbar-item" href={menu.href} key={i}>
             <Icon icon={menu.icon} color="white" width="24" height="24" />
             <span>{menu.name}</span>
           </a>
@@ -38,10 +46,10 @@ function App() {
 
       {/* Mobile bottom navbar */}
       <div className="navbar-bottom">
-        {menus.map((menu) => (
-          <a className="navbar-item" href={menu.href}>
+        {menus.map((menu, i) => (
+          <a className="navbar-item" href={menu.href} key={i}>
             <Icon icon={menu.icon} color="white" width="20" height="20" />
-            <span>{menu.name}</span>
+            <span>{menu.name} </span>
           </a>
         ))}
       </div>
@@ -52,19 +60,19 @@ function App() {
       </header>
 
       <div className="search-box">
-        <div id="blur"></div>
-        <div className="search-header">
+        <div id="blur" onClick={handleFocusOut}></div>
+        {/* <div className="search-header">
           <span className="search-header-title">Rechercher</span>
           <span className="search-header-button">Annuler</span>
-        </div>
+        </div> */}
 
         <div className="searchbar">
           <Searchbar></Searchbar>
         </div>
       </div>
       <div className="contain">
-        {Array.from(Array(20)).map(() => (
-          <div className="item"></div>
+        {Array.from(Array(20)).map((x, y) => (
+          <div className="item" key={y}></div>
         ))}
       </div>
       <footer></footer>
