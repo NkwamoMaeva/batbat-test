@@ -12,7 +12,6 @@ const menus = [
 
 const handleFocusOut = () => {
   document.body.style.overflowY = "scroll";
-
   document.getElementById("blur")!.style.display = "none";
   //Hide datalist on search input
   document.getElementById("result-list")!.style.visibility = "hidden";

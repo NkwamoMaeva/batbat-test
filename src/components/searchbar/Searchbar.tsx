@@ -52,6 +52,7 @@ function Searchbar() {
     setsearchValue(place.unique_name);
     document.getElementById("result-list")!.style.visibility = "hidden";
     document.getElementById("blur")!.style.display = "none";
+    document.body.style.overflowY = "scroll";
   };
 
   return (
