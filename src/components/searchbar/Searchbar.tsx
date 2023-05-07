@@ -13,7 +13,6 @@ function Searchbar() {
     searchPlaces(e.target.value)
       .then((data: Place[]) => {
         setplaces([...data]);
-        console.log(places);
       })
       .catch(() => {
         return { error: "Unable to retrieve places" };
@@ -21,12 +20,10 @@ function Searchbar() {
   };
 
   const handleFocus = () => {
-    console.log(searchValue);
     if (searchValue === "") {
       getPlaces()
         .then((data: Place[]) => {
-          setplaces([...data]);
-          console.log(places);
+          setplaces(data);
         })
         .catch(() => {
           return { error: "Unable to retrieve places" };
@@ -46,13 +43,18 @@ function Searchbar() {
     //Show datalist on search input
     document.getElementById("result-list")!.style.visibility = "visible";
   };
-
-  const handlePlaceSelected = (place: Place) => {
-    console.log(place.local_name);
-    setsearchValue(place.unique_name);
-    document.getElementById("result-list")!.style.visibility = "hidden";
-    document.getElementById("blur")!.style.display = "none";
+  const handleFocusOut = (place?: Place) => {
     document.body.style.overflowY = "scroll";
+    document.getElementById("blur")!.style.display = "none";
+    if (place) {
+      setsearchValue(place.unique_name);
+
+      //Hide datalist on search input
+      document.getElementById("result-list")!.style.visibility = "hidden";
+    } else {
+      //Hide datalist on search input
+      document.getElementById("result-list")!.style.visibility = "hidden";
+    }
   };
 
   return (
@@ -67,13 +69,9 @@ function Searchbar() {
           onChange={handleChange}
           placeholder="Une destination, demande..."
         />
-        <div id="result-list">
+        <div id="result-list" onClick={() => handleFocusOut()}>
           {places.map((place, i) => (
-            <div
-              className="item"
-              key={i}
-              onClick={() => handlePlaceSelected(place)}
-            >
+            <div className="item" key={i} onClick={() => handleFocusOut(place)}>
               <Icon icon="mdi:city-variant-outline" />
               <div className="item">{place.local_name}</div>
             </div>
